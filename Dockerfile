@@ -3,9 +3,9 @@ ENV CGO_ENABLED=0
 RUN apk add --update git curl
 RUN set -ex && \
     go get -u -v \
-        -ldflags "-X main.version=$(curl -sSL https://api.github.com/repos/chenhw2/aliyun-ddns-cli/commits/master | \
+        -ldflags "-X main.version=$(curl -sSL https://api.github.com/repos/xin478/aliyun-ddns-cli/commits/master | \
             sed -n '1,9{/sha/p; /date/p}' | sed 's/.* \"//g' | cut -c1-10 | tr [a-z] [A-Z] | sed 'N;s/\n/@/g')" \
-        github.com/chenhw2/aliyun-ddns-cli
+        github.com/xin478/aliyun-ddns-cli
 
 FROM chenhw2/alpine:base
 LABEL MAINTAINER CHENHW2 <https://github.com/chenhw2>
