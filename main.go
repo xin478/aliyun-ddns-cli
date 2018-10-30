@@ -102,6 +102,7 @@ func (ak *AccessKey) CheckAndUpdateRecordA(fulldomain, ipaddr string) (err error
 		return // Skip
 	}
 	rr := regexp.MustCompile(`\.[^\.]*`).ReplaceAllString(fulldomain, "")
+	rr = strings.Replace(rr, "_", ".", -1) 
 	domain := regexp.MustCompile(`^[^\.]*\.`).ReplaceAllString(fulldomain, "")
 	// fmt.Println(rr, domain)
 	var target *dns.RecordTypeNew
@@ -179,7 +180,7 @@ func main() {
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "d",
-					Usage: "Specific `FullDomainName`. like ddns.aliyun.com",
+					Usage: "Specific `FullDomainName`. like ddns.aliyun.com *_nas.aliyun.com",
 				},
 			},
 			Action: func(c *cli.Context) error {
